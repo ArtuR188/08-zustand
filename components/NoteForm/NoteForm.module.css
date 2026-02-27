@@ -1,0 +1,80 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #cdd6f4;
+}
+
+.input,
+.textarea,
+.select {
+  padding: 10px 14px;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  color: #cdd6f4;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #cba6f7;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.select option {
+  background: #313244;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cancelButton {
+  padding: 10px 20px;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  background: transparent;
+  color: #cdd6f4;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancelButton:hover {
+  background: #313244;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #cba6f7;
+  color: #1e1e2e;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submitButton:hover {
+  opacity: 0.85;
+}

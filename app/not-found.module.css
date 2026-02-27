@@ -1,0 +1,32 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: calc(100vh - 120px);
+  text-align: center;
+  padding: 24px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #cdd6f4;
+}
+
+.description {
+  color: #a6adc8;
+  font-size: 16px;
+}
+
+.link {
+  color: #cba6f7;
+  text-decoration: none;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

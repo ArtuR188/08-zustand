@@ -1,0 +1,39 @@
+.header {
+  background-color: #1e1e2e;
+  border-bottom: 1px solid #313244;
+  padding: 0 16px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #cba6f7;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
+}
+
+.navLink {
+  color: #cdd6f4;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.navLink:hover {
+  color: #cba6f7;
+}
