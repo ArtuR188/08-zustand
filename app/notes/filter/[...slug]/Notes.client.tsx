@@ -1,7 +1,8 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useDebouncedCallback } from 'use-debounce';
 import Link from 'next/link';
 import { fetchNotes } from '@/lib/api/notes';
 import NoteList from '@/components/NoteList/NoteList';
@@ -14,9 +15,17 @@ interface NotesClientProps {
 }
 
 export default function NotesClient({ tag }: NotesClientProps) {
-  const searchParams = useSearchParams();
-  const page: number = Number(searchParams.get('page') ?? 1);
-  const search: string = searchParams.get('search') ?? '';
+  const [page, setPage] = useState<number>(1);
+  const [search, setSearch] = useState<string>('');
+
+  const handleSearch = useDebouncedCallback((value: string): void => {
+    setSearch(value);
+    setPage(1);
+  }, 400);
+
+  const handlePageChange = (newPage: number): void => {
+    setPage(newPage);
+  };
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['notes', { tag, page, search }],
@@ -32,7 +41,7 @@ export default function NotesClient({ tag }: NotesClientProps) {
   return (
     <div className={css.container}>
       <div className={css.toolbar}>
-        <SearchBox />
+        <SearchBox onSearch={handleSearch} />
         <Link href="/notes/action/create" className={css.createButton}>
           Create note +
         </Link>
@@ -43,7 +52,11 @@ export default function NotesClient({ tag }: NotesClientProps) {
       {data && (
         <>
           <NoteList notes={data.notes} />
-          <Pagination totalPages={data.totalPages} />
+          <Pagination
+            totalPages={data.totalPages}
+            currentPage={page}
+            onPageChange={handlePageChange}
+          />
         </>
       )}
     </div>

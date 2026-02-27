@@ -23,7 +23,7 @@ export default function NoteForm() {
     if (titleRef.current) titleRef.current.value = draft.title;
     if (contentRef.current) contentRef.current.value = draft.content;
     if (tagRef.current) tagRef.current.value = draft.tag;
-  }, );
+  }, [draft.title, draft.content, draft.tag]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (payload: CreateNotePayload) => createNote(payload),

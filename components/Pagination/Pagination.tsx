@@ -5,17 +5,23 @@ import css from './Pagination.module.css';
 
 interface PaginationProps {
   totalPages: number;
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
 }
 
-export default function Pagination({ totalPages }: PaginationProps) {
+export default function Pagination({ totalPages, currentPage, onPageChange }: PaginationProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page') ?? 1);
+  const page = currentPage ?? Number(searchParams.get('page') ?? 1);
 
-  const handlePage = (page: number) => {
+  const handlePage = (newPage: number): void => {
+    if (onPageChange) {
+      onPageChange(newPage);
+      return;
+    }
     const params = new URLSearchParams(searchParams.toString());
-    params.set('page', String(page));
+    params.set('page', String(newPage));
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -25,20 +31,20 @@ export default function Pagination({ totalPages }: PaginationProps) {
     <div className={css.pagination}>
       <button
         className={css.btn}
-        onClick={() => handlePage(currentPage - 1)}
-        disabled={currentPage === 1}
+        onClick={() => handlePage(page - 1)}
+        disabled={page === 1}
       >
         ← Prev
       </button>
 
       <span className={css.info}>
-        {currentPage} / {totalPages}
+        {page} / {totalPages}
       </span>
 
       <button
         className={css.btn}
-        onClick={() => handlePage(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        onClick={() => handlePage(page + 1)}
+        disabled={page === totalPages}
       >
         Next →
       </button>

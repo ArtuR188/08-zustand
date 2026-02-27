@@ -4,12 +4,20 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 import css from './SearchBox.module.css';
 
-export default function SearchBox() {
+interface SearchBoxProps {
+  onSearch?: (value: string) => void;
+}
+
+export default function SearchBox({ onSearch }: SearchBoxProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const handleSearch = useDebouncedCallback((value: string) => {
+    if (onSearch) {
+      onSearch(value);
+      return;
+    }
     const params = new URLSearchParams(searchParams.toString());
     if (value) {
       params.set('search', value);
@@ -26,7 +34,7 @@ export default function SearchBox() {
       type="text"
       placeholder="Search notes..."
       defaultValue={searchParams.get('search') ?? ''}
-      onChange={(e) => handleSearch(e.target.value)}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
     />
   );
 }
