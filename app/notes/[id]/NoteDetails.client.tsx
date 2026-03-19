@@ -12,6 +12,7 @@ export default function NoteDetailsClient({ note }: Props) {
       <h2>{note.title}</h2>
       <p>{note.tag}</p>
       <p>{note.content}</p>
+      <p>{new Date(note.createdAt).toLocaleDateString()}</p>
     </div>
   );
 }
