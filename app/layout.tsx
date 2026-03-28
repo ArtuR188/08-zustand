@@ -1,25 +1,35 @@
-import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
-import './globals.css';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+import type { Metadata } from "next";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { Roboto } from "next/font/google";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import "./globals.css";
 
 const roboto = Roboto({
-  weight: ['400', '700'],
-  variable: '--font-roboto',
-  display: 'swap',
-  subsets: ['latin'],
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://08-zustand-eight-smoky.vercel.app";
+
 export const metadata: Metadata = {
-  title: 'NoteHub',
-  description: 'NoteHub - a simple and efficient app for managing personal notes',
+  title: "NoteHub",
+  description: "A simple notes application built with Next.js",
+  metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: 'NoteHub',
-    description: 'NoteHub - a simple and efficient app for managing personal notes',
-    url: 'https://your-app.vercel.app',
-    images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+    title: "NoteHub",
+    description: "NoteHub – convenient app for managing your notes",
+    url: SITE_URL,
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NoteHub",
+      },
+    ],
   },
 };
 
@@ -28,16 +38,16 @@ export default function RootLayout({
   modal,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
+  modal?: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={roboto.variable}>
+    <html lang="en" className={roboto.variable}>
+      <body className={roboto.className}>
         <TanStackProvider>
           <Header />
-          <main>{children}</main>
-          <Footer />
+          {children}
           {modal}
+          <Footer />
         </TanStackProvider>
       </body>
     </html>

@@ -1,4 +1,8 @@
 .app {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0px auto;
+  padding: 0 16px 16px;
   flex: 1;
 }
 
@@ -21,7 +25,6 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  text-decoration: none;
 }
 
 .button:hover {

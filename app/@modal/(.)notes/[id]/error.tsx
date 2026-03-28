@@ -5,7 +5,5 @@ type ErrorProps = {
 };
 
 export default function Error({ error }: ErrorProps) {
-  return (
-    <p>Could not fetch note details. {error.message}</p>
-  );
+  return <p>Failed to load note: {error.message}</p>;
 }

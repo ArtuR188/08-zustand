@@ -64,4 +64,4 @@ export const createNote = async (payload: CreateNotePayload): Promise<Note> => {
 export const deleteNote = async (id: string): Promise<Note> => {
   const { data } = await api.delete<Note>(`/notes/${id}`);
   return data;
-};
+};export { fetchNotes as getNotes, fetchNoteById as getNoteById }; 
